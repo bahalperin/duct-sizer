@@ -1,0 +1,47 @@
+.hidden {
+	visibility: none;
+}
+
+.shown {
+	background-color: red;
+}
+
+input[type="text"] {
+	float: right;
+	display: inline;
+}
+
+span > div {
+	width: 600px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.red {
+	background-color: blue;
+}
+
+li {
+	list-style-type: none;
+}
+
+.error {
+	color: red;
+	font-size: 8pt;
+}
+
+#parent {
+	position: relative;
+}
+
+#width {
+	position: absolute;
+	left: 360px;
+	background-color: blue
+}
+
+#height {
+	position: absolute;
+	right: 0px;
+}
+	

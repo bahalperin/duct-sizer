@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+		<form method="post" id="propertyform">
+			<div class="one-third column">
+				<div>
+					<label for="air_flow">Air Flow (CFM)</label>
+					<input type="text" name="air_flow" class="property" id="air_flow" value={{air_flow}}>
+				</div>
+				<div>
+					<label for="static_pressure">Static Pressure (in. wg/100 ft.)</label>
+					<input type="text" name="static_pressure" id="static_pressure" class="property" value={{static_pressure}}>
+				</div>
+				<div>
+					<label for="velocity">Velocity (fpm)</label>
+					<input type="text" name="velocity" id="velocity" class="property" value={{velocity}} >
+				</div>
+							<div class="two columns">
+				<input type="submit" value="Calculate!">
+			</div>
+			<div id="messageBox">
+			</div>
+			</div>
+			<div class="one-third column">
+				<div>
+					<label for="diameter">Duct Diameter (in.)</label>
+					<input type="text" name="diameter" id="diameter" class="property" value={{diameter}}>
+				</div>
+				<div id="parent">
+					<div>
+						<label id="width_label" for="width">Width/</label>
+					</div>
+					
+					<div>
+						<label id="height_label" for="height">Height</label> (in.)
+					</div>
+				</div>
+				<div>
+						
+					<input type="text" name="width" id="width" class="property" value={{width}}>
+						
+						
+					<input type="text" name="height" id="height" value={{height}}>
+						
+				</div>
+			</div>
+			<div>
+				{{error}}
+			</div>
+
+		</form>
+	<script type='text/javascript' src='/javascript/validation-logic.js'></script>
+
+{% if duct %}
+<div class="one-third column">
+	<div>Air Flow: {{duct.air_flow}} CFM</div>
+	<div>Velocity: {{duct.velocity}} fpm</div>
+	<div>Static Pressure: {{duct.static_pressure}} in. wg/100 ft.</div>
+	<div>Duct Diameter: <span class="diameter">{{duct.diameter}}</span> in.</div>
+	<div id="results">
+	<div>
+	<input class="search" id="search"/>
+	</div>
+	<ul class="list">
+		<lh>Rectangular Duct Dimensions:</lh>
+		{% for x in duct.rectangular_dimensions %}
+		<li style='font-weight:bold'>
+			<span class="width">{{x[0]}}/</span><span class="height">{{x[1]}}</span> 
+		</li>
+	{% endfor %}
+
+	</ul>
+</div>
+<script>
+	var results = {valueNames: ['width']};
+	var the_results = new List('results', results);
+</script>
+{% endif %}
+</div>
+{% endblock %}
