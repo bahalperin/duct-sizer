@@ -20,27 +20,8 @@
 /* #Page Styles
 ================================================== */
 
-#width_label {
-	display: inline-block;
-	float: left;
-	margin: 0px;
-	padding: 0px;
-}
 
-#height_label {
-	display: inline-block;
-	float: left;
-	margin: 0px;
-	padding: 0px;
-}
 
-input[name="width"] {
-	width: 100px;
-}
-
-input[name="height"] {
-	width: 100px;
-}
 /* #Media Queries
 ================================================== */
 

@@ -3,21 +3,34 @@
 <html>
 	<head>
 		<title>Duct Sizer!</title>
-		
-		<link rel="stylesheet" type="text/css" href="/stylesheets/skeleton.css"/>
+        
+        <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700,300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,900,700italic' rel='stylesheet' type='text/css'>
+        
+		<link rel="stylesheet" type="text/css" href="/stylesheets/chosen.css"/>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/flexgrid.css"/>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/footable.core.min.css"/>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/footable.metro.css"/>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/base.css"/>
-		<link rel="stylesheet" type="text/css" href="/stylesheets/layout.css"/>
+	    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css"/>
+        
 		<script type="text/javascript" src="/javascript/jquery.js"></script>
-		<script type="text/javascript" src="/javascript/list.js"></script>
+		<script type="text/javascript" src="/javascript/chosen.jquery.min.js"></script>
 		<script type="text/javascript" src="/javascript/jquery.validate.js"></script>
-		<script type="text/javascript" src="/javascript/additional-methods.js"></script>
+        <script type="text/javascript" src="/javascript/additional-methods.js"></script>
+		<script type="text/javascript" src="/javascript/footable.min.js"></script>
 		<script type='text/javascript' src='/javascript/script.js'></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	
-	<body class="container">
-		<h1 style="background-color: #ddd; color: #888; margin: 0; height: 50px;text-align:center">Duct Sizer</h1>
+	<body>
+        <div>
+            <h1 class="page-title header">Duct Sizer</h1>
 		
-		{% block content %}
-		{% endblock %}
+            {% block content %}
+            {% endblock %}
+
+        </div>
 	</body>
 </html>

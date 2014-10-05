@@ -1,82 +1,160 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
 
-		<form method="post" id="propertyform">
-			<div class="one-third column">
-				<div>
-					<label for="air_flow">Air Flow (CFM)</label>
-					<input type="text" name="air_flow" class="property" id="air_flow" value={{air_flow}}>
-				</div>
-				<div>
-					<label for="static_pressure">Static Pressure (in. wg/100 ft.)</label>
-					<input type="text" name="static_pressure" id="static_pressure" class="property" value={{static_pressure}}>
-				</div>
-				<div>
-					<label for="velocity">Velocity (fpm)</label>
-					<input type="text" name="velocity" id="velocity" class="property" value={{velocity}} >
-				</div>
-							<div class="two columns">
-				<input type="submit" value="Calculate!">
-			</div>
-			<div id="messageBox">
-			</div>
-			</div>
-			<div class="one-third column">
-				<div>
-					<label for="diameter">Duct Diameter (in.)</label>
-					<input type="text" name="diameter" id="diameter" class="property" value={{diameter}}>
-				</div>
-				<div id="parent">
-					<div>
-						<label id="width_label" for="width">Width/</label>
-					</div>
-					
-					<div>
-						<label id="height_label" for="height">Height</label> (in.)
-					</div>
-				</div>
-				<div>
-						
-					<input type="text" name="width" id="width" class="property" value={{width}}>
-						
-						
-					<input type="text" name="height" id="height" value={{height}}>
-						
-				</div>
-			</div>
-			<div>
-				{{error}}
-			</div>
-
-		</form>
-	<script type='text/javascript' src='/javascript/validation-logic.js'></script>
-
-{% if duct %}
-<div class="one-third column">
-	<div>Air Flow: {{duct.air_flow}} CFM</div>
-	<div>Velocity: {{duct.velocity}} fpm</div>
-	<div>Static Pressure: {{duct.static_pressure}} in. wg/100 ft.</div>
-	<div>Duct Diameter: <span class="diameter">{{duct.diameter}}</span> in.</div>
-	<div id="results">
-	<div>
-	<input class="search" id="search"/>
-	</div>
-	<ul class="list">
-		<lh>Rectangular Duct Dimensions:</lh>
-		{% for x in duct.rectangular_dimensions %}
-		<li style='font-weight:bold'>
-			<span class="width">{{x[0]}}/</span><span class="height">{{x[1]}}</span> 
-		</li>
-	{% endfor %}
-
-	</ul>
+<div>
+    <h3 class="header">Enter two known properties and the duct sizer will calculate the rest.</h3>
 </div>
-<script>
-	var results = {valueNames: ['width']};
-	var the_results = new List('results', results);
+
+<div class="wrapper container">
+	<div class="row">
+		<div class="content-panel col_6" id="inputs">
+            <h3 class="text-underline add-bottom">Inputs:</h3>
+            
+            <form method="post" id="propertyform">
+                <fieldset>	
+                    <div class="input-field">
+                        <div class="row no_padding half-bottom">
+
+                            <div class="col_3">
+                                <label for="dropdown_1">Property 1:</label>
+                            </div>
+
+                            <div class="col_4">
+                                <select id="dropdown_1" name="dropdown_1" for="input_1">
+                                {% for value,display_name in options|dictsort if value not in compatibility[dropdown_2] %}
+                                    {% if value == dropdown_1 %}
+                                    <option value="{{value}}" selected="selected">{{display_name}}</option>
+                                    {% else %}
+                                    <option value="{{value}}">{{display_name}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                                </select> 
+                            </div>
+                            <div class="col_5 last"></div>
+
+                        </div>
+                        <div class="row no_padding">
+                            <div class="col_3">
+                                <label for="input_1">Value: </label>
+                            </div>
+                            <div class="col_4">
+                                <input type="text" name="input_1" id="input_1" value="{{input_1}}">
+                            </div>
+                            <div class="col_1"></div>
+                            <div class="text-bold col_4 last" id="units_1">
+                                ({{units[dropdown_1]}})
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <br>
+                    <br>
+                    
+                    <div class="input-field add-bottom">
+                        <div class="row no_padding half-bottom">
+                            <div class="col_3">
+                                <label for="dropdown_2">Property 2:</label>
+                            </div>
+                            <div class="col_4">
+                                <select id="dropdown_2" name="dropdown_2">
+                                {% for value,display_name in options|dictsort if value not in compatibility[dropdown_1] %}
+                                    {% if value == dropdown_2 %}
+                                        <option value="{{value}}" selected="selected">{{display_name}}</option>
+                                    {% else %}
+                                        <option value="{{value}}">{{display_name}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                                </select> 
+                            </div>
+                            <div class="col_5 last"></div>
+                        </div>
+
+                        <div class="row no_padding">
+                            <div class="col_3">
+                                <label for="input_2">Value: </label>
+                            </div>
+                            <div class="col_4">
+                                <input type="text" name="input_2" id="input_2" value="{{input_2}}">
+                            </div>
+                            <div class="col_1"></div>
+                            <div class="text-bold col_4 last" id="units_2">
+                                ({{units[dropdown_2]}})
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row no_padding">
+                        <div class="col_4"></div>
+                        <div class="col_4">
+                            <input type="submit" value="Calculate!">
+                        </div>
+                        <div class="col_4 last"></div>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+
+
+        <div class="content-panel col_6 last">
+            <h3 class="text-underline add-bottom">Results:</h3>
+		
+            <table class="footable metro-gray">
+
+                <thead><tr><th data-hide="tiny">Property</th><th>Value</th></tr></thead>
+                <tr><td>Air Flow (CFM):</td><td>{% if duct %} {{duct.air_flow}} {% endif %}</td></tr>
+                <tr><td>Velocity (fpm):</td><td> {% if duct %} {{duct.velocity}}{% endif %}</td></tr>
+                <tr><td>Pressure Loss (in. wg/100 ft.):</td><td> {% if duct %} {{duct.pressure_loss}}{% endif %}</td></tr>
+                <tr><td>Duct Diameter (in.):</td><td>{% if duct %} {{duct.diameter}}{% endif %}</td></tr>
+                <tr><td>Rectangular Dimensions (in.):</td>
+                    <td>
+                            {% if duct %} 
+                        <select data-placeholder="No Results">
+
+                        {% for width,height in duct.rectangular_dimensions|dictsort|reverse %}
+                            <option value="{{width}}">{{width}} / {{height}}</option>
+                        {% endfor %}
+
+                        </select>
+                        {% endif %}
+                    </td>
+                </tr>
+		    </table>
+
+
+        </div>
+    </div>
+
+    <div class="server-error">{{error}}</div>
+    
+    <div class="row no_padding">
+        <div id="messageBox" class="col_12 last">
+
+            <h4 class="error-title">Please correct these mistakes and try again:</h4>
+            
+            <br>
+            
+            <ul></ul>
+      
+        </div>
+    </div>
+    
+</div>
+
+<script type='text/javascript' src='/javascript/validation-logic.js'></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.footable').footable({
+            breakpoints: {
+            tiny: 320,
+            medium: 555,
+            big: 2048
+        }
+    });
+});
 </script>
-{% endif %}
-</div>
+
 {% endblock %}

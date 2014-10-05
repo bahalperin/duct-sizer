@@ -1,47 +1,99 @@
-.hidden {
-	visibility: none;
-}
-
-.shown {
-	background-color: red;
-}
-
-input[type="text"] {
-	float: right;
-	display: inline;
-}
-
-span > div {
-	width: 600px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-
-.red {
-	background-color: blue;
+/* General Styles */
+body {
+    background: rgba(121, 172, 195, 0.73);
 }
 
 li {
-	list-style-type: none;
+    list-style-type: circle;
 }
 
-.error {
+input[type=submit] {
+	width: 100px;
+	margin: 0 auto;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.text-bold {
+    font-weight: 700;
+}
+
+.container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    background: #ddd;    
+}
+
+.page-title {
+    font-weight: 700;
+    height: 50px;
+    margin: 0;
+}
+
+.content-panel {
+	background: #ddd;
+    border-radius: 15px;
+}
+
+.input-field {
+    background: rgba(77, 76, 76, 0.16);
+    padding-top: 15px;
+    padding-bottom: 5px;
+    border-radius: 15px;
+}
+
+/* Error Styles */
+label.invalid {
 	color: red;
-	font-size: 8pt;
 }
 
-#parent {
-	position: relative;
+input.invalid {
+	color: red;
+    font-weight: bold;
+    border: 3px solid red !important;
 }
 
-#width {
-	position: absolute;
-	left: 360px;
-	background-color: blue
+.error-title {
+    color: red;
+    text-align: center;
+    font-weight: 700;
 }
 
-#height {
-	position: absolute;
-	right: 0px;
+.server-error {
+    color: red;
+    font-weight: 700;
+    font-size: 28px;
+    text-align: center;
+    padding-top: 20px;
 }
-	
+
+#messageBox {
+    min-height: 50px;
+    background: white;
+    border-radius: 15px;
+    border: 3px solid #e60505;
+    display: none;
+}
+
+#messageBox ul {
+    margin-left: 50px;
+}
+
+/* Modify Framework Styles */
+.footable {
+    background: white;
+}
+
+.chosen-container {
+	width: 150px !important;
+}
+
+td > .chosen-container {
+	width: 100px !important;
+}
