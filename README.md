@@ -1,4 +1,5 @@
 duct-sizer
 ===========================
 
-This is a duct sizing application meant to replace the cardboard equivalent.
+This is the code for a [duct sizing application](http://duct-sizer.appspot.com/) meant to replace the cardboard equivalent.
+
